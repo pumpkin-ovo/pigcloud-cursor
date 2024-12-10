@@ -23,6 +23,7 @@ public interface RemoteParamService {
 	 */
 	@NoToken
 	@GetMapping("/param/publicValue/{key}")
+	// @PathVariable("key") 注解接收一个名为 key 的 URI 模板变量，并返回一个 R<String> 类型的对象
 	R<String> getByKey(@PathVariable("key") String key);
 
 }

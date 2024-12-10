@@ -57,6 +57,7 @@ public interface RemoteTokenService {
 	 * @return
 	 */
 	@NoToken
+	// 从HTTP请求中提取名为token的参数，并尝试将其转换为String类型，然后赋值给方法中的token参数
 	@GetMapping("/token/query-token")
 	R<Map<String, Object>> queryToken(@RequestParam("token") String token);
 

@@ -41,6 +41,7 @@ public interface RemoteLogService {
 	 */
 	@NoToken
 	@PostMapping("/log/save")
+	// @RequestBody将请求体中的数据反序列化为 SysLog 类型的对象，并将其作为 sysLog 参数传递给该方法
 	R<Boolean> saveLog(@RequestBody SysLog sysLog);
 
 }

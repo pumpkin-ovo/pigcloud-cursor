@@ -42,6 +42,9 @@ public interface RemoteUserService {
 	 */
 	@NoToken
 	@GetMapping("/user/info/query")
+	// 将user对象的属性作为查询参数添加到请求中
 	R<UserInfo> info(@SpringQueryMap UserDTO user);
 
+   //当调用queryUserInfo方法时，Feign会创建一个GET请求，并将UserDTO对象的属性转换为查询字符串
+	// 例如，如果user对象的name是"John"，age是30，那么生成的请求URL将是/user/info/query?name=John&age=30
 }

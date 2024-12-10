@@ -79,7 +79,10 @@ public class SysClientController {
 	@GetMapping("/page")
 	public R getOauthClientDetailsPage(@ParameterObject Page page,
 			@ParameterObject SysOauthClientDetails sysOauthClientDetails) {
+		// 创建一个LambdaQueryWrapper实例，用于构建针对SysOauthClientDetails实体的查询条件
 		LambdaQueryWrapper<SysOauthClientDetails> wrapper = Wrappers.<SysOauthClientDetails>lambdaQuery()
+				// 如果sysOauthClientDetails对象的clientId属性不为空（且不仅仅是空白字符），
+				// 则添加一个LIKE查询条件，搜索clientId字段中包含sysOauthClientDetails.getClientId()值的记录
 			.like(StrUtil.isNotBlank(sysOauthClientDetails.getClientId()), SysOauthClientDetails::getClientId,
 					sysOauthClientDetails.getClientId())
 			.like(StrUtil.isNotBlank(sysOauthClientDetails.getClientSecret()), SysOauthClientDetails::getClientSecret,

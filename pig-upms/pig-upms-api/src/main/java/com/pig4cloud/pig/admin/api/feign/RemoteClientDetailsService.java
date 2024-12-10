@@ -31,6 +31,8 @@ import org.springframework.web.bind.annotation.PathVariable;
  * @author lengleng
  * @date 2020/12/05
  */
+// contextId 属性用于指定这个 Feign 客户端的上下文 ID（或称为 bean 名称）
+// 	value 属性用于指定这个 Feign 客户端要调用的微服务的名称。这个名称通常是在微服务架构中用于服务发现和注册的名称
 @FeignClient(contextId = "remoteClientDetailsService", value = ServiceNameConstants.UPMS_SERVICE)
 public interface RemoteClientDetailsService {
 

@@ -25,8 +25,10 @@ public class DictResolver {
 	 * @return 字典数据项集合
 	 */
 	public List<SysDictItem> getDictItemsByType(String type) {
+		// 使用Assert工具类验证传入的type参数是否不为空且不为仅包含空白字符的字符串
 		Assert.isTrue(StringUtils.isNotBlank(type), "参数不合法");
 
+		// 获取远程服务实例
 		RemoteDictService remoteDictService = SpringContextHolder.getBean(RemoteDictService.class);
 
 		return remoteDictService.getDictByType(type).getData();

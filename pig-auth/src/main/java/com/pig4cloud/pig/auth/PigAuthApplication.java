@@ -17,17 +17,22 @@
 package com.pig4cloud.pig.auth;
 
 import com.pig4cloud.pig.common.feign.annotation.EnablePigFeignClients;
+import com.pig4cloud.pig.common.log.config.PigLogProperties;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.context.annotation.ComponentScan;
 
-/**
+/**com.pig4cloud.pig.common.log.config
  * @author lengleng
  * @date 2018年06月21日 认证授权中心
  */
 @EnablePigFeignClients
 @EnableDiscoveryClient
 @SpringBootApplication
+@EnableConfigurationProperties(PigLogProperties.class)
 public class PigAuthApplication {
 
 	public static void main(String[] args) {

@@ -37,16 +37,21 @@ public class ImageCodeEndpoint {
 	@SneakyThrows
 	@GetMapping("/image")
 	public void image(String randomStr, HttpServletResponse response) {
+		// 创建一个算术验证码对象，设置图片的宽度和高度
 		ArithmeticCaptcha captcha = new ArithmeticCaptcha(DEFAULT_IMAGE_WIDTH, DEFAULT_IMAGE_HEIGHT);
 
+		// 校验传入的 randomStr 是否为一个有效的手机号码，如果是，则不生成验证码直接返回
 		if (Validator.isMobile(randomStr)) {
-			return;
+			return; // 如果是手机号码，直接返回，不生成验证码
 		}
 
+		// 获取算术验证码的文本内容，即计算题的答案（例如：12 + 8 = ?）
 		String result = captcha.text();
+		// 将验证码的答案存储到 Redis 中，以便后续验证，缓存的键为 'DEFAULT_CODE_KEY + randomStr'
+		// 缓存有效期由 'SecurityConstants.CODE_TIME' 指定，单位为秒
 		redisTemplate.opsForValue()
 			.set(CacheConstants.DEFAULT_CODE_KEY + randomStr, result, SecurityConstants.CODE_TIME, TimeUnit.SECONDS);
-		// 转换流信息写出
+		// 将生成的验证码图片流写入到响应输出流中，直接返回给客户端
 		captcha.out(response.getOutputStream());
 	}
 
